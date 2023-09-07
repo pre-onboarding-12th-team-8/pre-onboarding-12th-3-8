@@ -14,7 +14,7 @@ export const SearchedKeywordCard = () => {
         <>
           {recommendedData.searchList.map((keyword: string, index: number) => (
             <SearchedKeywordItem
-              focused={focusedRecommendSearchItemIndex === index}
+              $focused={focusedRecommendSearchItemIndex === index}
               key={keyword}
               label={keyword}
               onClickItem={() => submitSearchKeyword(keyword)}
