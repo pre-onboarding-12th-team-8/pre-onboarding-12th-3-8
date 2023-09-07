@@ -1,6 +1,10 @@
 import axios, { isAxiosError } from "axios";
 import { BASE_URL } from "./config";
-import { getCacheData, exploreCachedData, cacheData } from "../utils";
+import {
+  getCacheData,
+  cacheData,
+  deleteExpiredSearchedCacheData,
+} from "../utils";
 
 export const SICK_CACHE_KEY_PREFIX = "cached_sick_keyword_";
 
@@ -36,11 +40,11 @@ export const handleError = (err: any) => {
 sickApi.interceptors.request.use((config) => {
   console.info("calling api");
   const toCacheKey = `${SICK_CACHE_KEY_PREFIX}-${config.url}`;
-  const cachedKey = exploreCachedData(toCacheKey);
-  if (cachedKey) {
+  const cachedData = getCacheData(toCacheKey);
+  if (cachedData.data.length > 0) {
     return {
       ...config,
-      data: getCacheData(cachedKey).data.map((item: string) => ({
+      data: cachedData.data.map((item: string) => ({
         sickCd: item,
         sickNm: item,
       })),
@@ -50,10 +54,14 @@ sickApi.interceptors.request.use((config) => {
 });
 
 sickApi.interceptors.response.use((response) => {
-  const isResponseData = response.data.length > 0;
   const toCacheKey = `${SICK_CACHE_KEY_PREFIX}-${response.config.url}`;
-  if (isResponseData) {
-    cacheData(response.data, toCacheKey);
+  const cachedData = getCacheData(toCacheKey);
+  if (cachedData.data.length > 0 && cachedData.expireTime) {
+    deleteExpiredSearchedCacheData(toCacheKey, cachedData.expireTime);
+  } else {
+    const searchText = response.config.url?.replace("/sick?q=", "");
+    if (searchText && searchText.length > 0)
+      cacheData(response.data, toCacheKey);
   }
   return response.data;
 });

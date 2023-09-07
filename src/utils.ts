@@ -14,14 +14,6 @@ export const cacheData = (toCacheData: string[], cacheKey: string): void => {
   );
 };
 
-export const exploreCachedData = (toCacheKey: string): string | undefined => {
-  return Object.keys(window.localStorage).find(
-    (cachedKey: string | undefined) => {
-      return cachedKey === toCacheKey;
-    },
-  );
-};
-
 export const getCacheData = (cacheKey: string): ICacheData => {
   const val = window.localStorage.getItem(cacheKey);
   return val === null ? { data: [], expireTime: null } : JSON.parse(val);
