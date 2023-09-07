@@ -31,10 +31,6 @@ interface ISearchActions {
   openSearchedKeywordCard: () => void;
 }
 
-interface ISearchProviderProps {
-  children: React.ReactElement;
-}
-
 const SearchValsCtx = createContext<ISearchVals>({
   searchText: "",
   recommendedData: {
