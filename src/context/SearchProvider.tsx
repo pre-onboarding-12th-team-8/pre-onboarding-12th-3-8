@@ -9,27 +9,15 @@ import React, {
 } from "react";
 import { useNavigate } from "react-router-dom";
 import { initialState, reducer } from "../reducers/searchReducer";
-import { ISearchState } from "../reducers/type";
 import { debounce } from "../utils";
 import { getSick } from "../api/sick";
 import { handleError } from "../api/http";
-
-export type SearchType = "sick";
-
-interface ISearchVals {
-  searchText: string;
-  recommendedData: ISearchState;
-  isFocusSearchForm: boolean;
-  searchFormRef: React.Ref<HTMLDivElement>;
-  focusedRecommendSearchItemIndex: number | null;
-}
-
-interface ISearchActions {
-  typeSearchedKeyword: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  initSearchedKeyword: (callback: Function) => void;
-  submitSearchKeyword: (searchedData: string) => void;
-  openSearchedKeywordCard: () => void;
-}
+import {
+  ISearchVals,
+  ISearchActions,
+  SearchType,
+  ISearchProviderProps,
+} from "./types";
 
 const SearchValsCtx = createContext<ISearchVals>({
   searchText: "",
@@ -66,16 +54,12 @@ export const useSearchActions = () => {
   return val;
 };
 
-interface ISearchProviderProps {
-  searchType: SearchType;
-  children: React.ReactElement;
-}
-
 export const SearchProvider = ({
   searchType,
   children,
 }: ISearchProviderProps) => {
   const [recommendedData, dispatch] = useReducer(reducer, initialState);
+
   const [searchText, setSearchText] = useState<string>("");
   const [isFocusSearchForm, setIsFocusSearchForm] = useState<boolean>(false);
   const searchFormRef = useRef<HTMLDivElement>(null);
