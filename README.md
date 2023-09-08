@@ -6,9 +6,9 @@
 
 ## ⚙ 실행 방법
 
-1. 프로젝트 내려받기: `git clone` [https://github.com/pre-onboarding-12th-team-8/pre-onboarding-12th-3-8.git ./](https://github.com/pre-onboarding-12th-team-8/pre-onboarding-12th-3-8.git) 
-2. 패키지 설치: `npm install`
-3. 애플리케이션 실행: `npm start` (브라우저가 자동으로 실행되어 홈페이지로 이동)
+1. 프로젝트 내려받기: `git clone` [https://github.com/pre-onboarding-12th-team-8/pre-onboarding-12th-3-8.git ./](https://github.com/pre-onboarding-12th-team-8/pre-onboarding-12th-3-8.git) 
+2. 패키지 설치: `npm install`
+3. 애플리케이션 실행: `npm start` (브라우저가 자동으로 실행되어 홈페이지로 이동)
 
 
 ## 🙋‍♂️팀원 소개
@@ -84,7 +84,7 @@
     - why?:
         - 본 프로젝트에서는 서버 모킹이 구현 사항에 명시되어 있지 않지만, 백엔드 API 배포가 아직 이루어지지 않은 상황을 고려하여 모킹을 도입하기로 결정
         - 제공된 **`ds.json`** 파일을 활용하면, 실제 백엔드 API와 유사한 동작을 구현할 수 있다. 이러한 접근방식은 프로젝트 배포 과정을 원활하게 진행할 수 있도록 돕게 될 것이라 예상된다.
-    
+
 2. **질환명 검색 시 API 호출하여 검색어 추천 기능 구현**
     - 관리 방식 : Context API
     - 공통 문제 :
@@ -97,7 +97,7 @@
         - Context API와 리듀서를 이용한 데이터 상태와 요청 상태 관리
     - why? :
         - 컴포넌트 간 의존성을 완전히 끊을 수 없는 상황에서도, Context API의 활용을 통해 Props 전달을 최소화하면서 프로젝트 관리를 더 효율적으로 할 수 있다고 판단
-    
+
 3. **API 호출별 로컬 캐싱 구현**
     - 캐싱 함수 형태 : **`utils.ts`**
     - 관리 방식  :  유틸 함수로 관리하여 관심사를 분리
@@ -110,7 +110,7 @@
     - why ? :
         - 세션 스토리지는 한 세션 동안만 데이터가 유지되므로 캐싱을 목적으로 한 스토리지 사용에는 부적합하다 판단
         - 지속적인 데이터 저장이 가능한 localStorage를 선택
-    
+
 4. **API 호출 횟수 줄이기**
     - 관리 위치 : **`utils.ts`**
     - 관리 방식 : 유틸 함수로 관리하여 특정 프레임워크에 대한 의존성 감소
@@ -120,7 +120,7 @@
     - why :
         - 디바운싱 로직을 분리함으로써, 의존성 분리가 더욱 명확해질 것으로 예상
         - 커스텀 훅과 유틸 함수 사이에서 고민했으나, state관리의 필요성이 덜하며 유틸 함수로 구현함으로써 프레임워크에 한정되지 않는 이점을 발견, 따라서 유틸 함수로의 구현이 더욱 바람직하다고 판단
-    
+
 5. **키보드만으로 추천 검색어 이동 기능 구현**
     - 관리 위치 : `src/context/SearchProvider.tsx`
     - 키포인트 :
@@ -131,10 +131,10 @@
     - why :
         - 키보드 이벤트 기능을 구현하다 보면 다수의 props 전달이 필요하게 되는데, 이를 최소화하기 위해 Context API를 사용하여 Props 드릴링의 최소화 하는데 중점을 맞춤
         - 방향키의 상/하 입력 감지는 **`keyPress`** 이벤트로는 처리할 수 없어, **`keydown`** 이벤트를 사용하여 이 기능을 구현.
-     
+
 ## 🛠Tech Stack
 <div>
-  
+
 Area| Tech Stack|
 :--------:|:------------------------------:|
 **Frontend** | <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black"> <img src="https://img.shields.io/badge/React Router-CA4245.svg?&style=for-the-badge&logo=reactrouter&logoColor=white"> <img src="https://img.shields.io/badge/Axios-5A29E4.svg?&style=for-the-badge&logo=axios&logoColor=white"> <img src="https://img.shields.io/badge/styledcomponents-DB7093.svg?&style=for-the-badge&logo=styledcomponents&logoColor=white">
