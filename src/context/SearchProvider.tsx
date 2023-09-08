@@ -134,15 +134,13 @@ export const SearchProvider = ({
     ): number | null => {
       let updateIndex: number | null = focusedRecommendSearchItemIndex;
       if (event.key === "ArrowUp") {
-        updateIndex =
-          updateIndex === 0 || updateIndex === null
-            ? recommendedData.searchList.length - 1
-            : --updateIndex;
+        updateIndex = !updateIndex
+          ? recommendedData.searchList.length - 1
+          : --updateIndex;
       }
       if (event.key === "ArrowDown") {
         updateIndex =
-          (typeof updateIndex === "number" &&
-            updateIndex + 1 === recommendedData.searchList.length) ||
+          updateIndex === recommendedData.searchList.length - 1 ||
           updateIndex === null
             ? 0
             : ++updateIndex;
