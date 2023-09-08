@@ -1,4 +1,4 @@
-# README
+# 프리온보딩 3주차 과제
 ## 🌐 배포 주소
 ### https://pre-onboarding-12th-3-8.vercel.app/
 ![image](https://github.com/Minsoek96/pre-onboarding-12th-3-8/assets/125581005/19a3062a-5d14-44b5-bdeb-852b9ed9ceb7)
