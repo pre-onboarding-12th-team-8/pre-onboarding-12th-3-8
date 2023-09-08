@@ -9,7 +9,7 @@ import React, {
 } from "react";
 import { useNavigate } from "react-router-dom";
 import { initialState, reducer } from "../reducers/searchReducer";
-import { debounce } from "../utils";
+import { debounce } from "../utils/utils";
 import { getSick } from "../api/sick";
 import { handleError } from "../api/http";
 import {
@@ -101,9 +101,14 @@ export const SearchProvider = ({
   const typeSearchedKeyword = (
     e: React.ChangeEvent<HTMLInputElement>,
   ): void => {
+    const typedVal = e.target.value;
     setFocusedRecommendSearchItemIndex(null);
-    setSearchText(e.target.value);
-    debouncedUpdateSearchList(e.target.value);
+    setSearchText(typedVal);
+    if (typedVal.length === 0) {
+      dispatch({ type: "SEARCH_LIST_INIT", data: [] });
+    } else {
+      debouncedUpdateSearchList(typedVal);
+    }
   };
 
   const initSearchedKeyword = (callback: Function): void => {
@@ -134,15 +139,13 @@ export const SearchProvider = ({
     ): number | null => {
       let updateIndex: number | null = focusedRecommendSearchItemIndex;
       if (event.key === "ArrowUp") {
-        updateIndex =
-          updateIndex === 0 || updateIndex === null
-            ? recommendedData.searchList.length - 1
-            : --updateIndex;
+        updateIndex = !updateIndex
+          ? recommendedData.searchList.length - 1
+          : --updateIndex;
       }
       if (event.key === "ArrowDown") {
         updateIndex =
-          (typeof updateIndex === "number" &&
-            updateIndex + 1 === recommendedData.searchList.length) ||
+          updateIndex === recommendedData.searchList.length - 1 ||
           updateIndex === null
             ? 0
             : ++updateIndex;
