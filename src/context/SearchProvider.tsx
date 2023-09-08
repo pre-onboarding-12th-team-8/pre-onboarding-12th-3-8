@@ -101,9 +101,14 @@ export const SearchProvider = ({
   const typeSearchedKeyword = (
     e: React.ChangeEvent<HTMLInputElement>,
   ): void => {
+    const typedVal = e.target.value;
     setFocusedRecommendSearchItemIndex(null);
-    setSearchText(e.target.value);
-    debouncedUpdateSearchList(e.target.value);
+    setSearchText(typedVal);
+    if (typedVal.length === 0) {
+      dispatch({ type: "SEARCH_LIST_INIT", data: [] });
+    } else {
+      debouncedUpdateSearchList(typedVal);
+    }
   };
 
   const initSearchedKeyword = (callback: Function): void => {

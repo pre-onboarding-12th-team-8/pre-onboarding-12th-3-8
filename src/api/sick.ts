@@ -1,6 +1,6 @@
 import { Dispatch } from "react";
 import { SearchDispatchType } from "../reducers/type";
-import { sickApi } from "./http";
+import { cacheApi } from "./http";
 import { API } from "./config";
 
 export interface IResponseSick {
@@ -13,7 +13,7 @@ export const getSick = async (
 ) => {
   try {
     dispatch({ type: "SEARCH_LIST_REQUEST" });
-    const response: IResponseSick[] = await sickApi.get(
+    const response: IResponseSick[] = await cacheApi.get(
       `${API.SICK}?q=${searchKey}`,
     );
     if (response) {
