@@ -7,7 +7,7 @@ export interface ICacheData {
   expireTime: string | null;
 }
 
-export const cacheData = (toCacheData: string[], cacheKey: string): void => {
+export const cacheData = (toCacheData: any[], cacheKey: string): void => {
   window.localStorage.setItem(
     cacheKey,
     JSON.stringify({ expireTime: new Date().getTime(), data: toCacheData }),
