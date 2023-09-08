@@ -1,4 +1,5 @@
-import { IResponseSick } from "./api/sick";
+import { IResponseSick } from "../api/sick";
+import { getLocalStorage } from "./localStorage";
 
 export const SECOND = 1000;
 export const MINUTE = SECOND * 60;
@@ -16,10 +17,6 @@ export const cacheData = (cacheKey: string, toCacheData: CacheType[]): void => {
     cacheKey,
     JSON.stringify({ expireTime: new Date().getTime(), data: toCacheData }),
   );
-};
-
-export const getLocalStorage = (storageKey: string): string | null => {
-  return window.localStorage.getItem(storageKey);
 };
 
 export const getCachedData = (cacheKey: string): ICacheData => {
@@ -43,12 +40,4 @@ export const getValidCacheData = (cacheKey: string): ICacheData | null => {
     deleteExpiredCacheData(cacheKey, Number(cachedData.expireTime));
   }
   return getLocalStorage(cacheKey) ? cachedData : null;
-};
-
-export const debounce = (fn: Function, ms = 300) => {
-  let timeoutId: ReturnType<typeof setTimeout>;
-  return function (this: any, ...args: any[]) {
-    clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => fn.apply(this, args), ms);
-  };
 };

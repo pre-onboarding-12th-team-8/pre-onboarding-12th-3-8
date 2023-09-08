@@ -1,6 +1,7 @@
 import axios, { isAxiosError } from "axios";
 import { BASE_URL } from "./config";
-import { getValidCacheData, cacheData, getLocalStorage } from "../utils";
+import { getValidCacheData, cacheData } from "../utils/cache";
+import { getLocalStorage } from "../utils/localStorage";
 
 export const CACHE_KEY_PREFIX = "cached_keyword_";
 
